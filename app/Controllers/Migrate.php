@@ -2,17 +2,16 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\Database\MigrationRunner;
 use Config\Migrations;
 
-class Home extends BaseController
+class Migrate extends ResourceController
 {
-    public function index(): string
-    {
-        return view('welcome_message');
-    }
+    protected $modelName = null;
+    protected $format    = 'json';
 
-    public function getMigrate(){
+    public function getIndex(){
         $config = new Migrations();
         $migration = new MigrationRunner($config);
         $migration->latest();
